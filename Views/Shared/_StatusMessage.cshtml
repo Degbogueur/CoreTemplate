@@ -1,0 +1,38 @@
+﻿@using CoreTemplate.Models.Commons;
+@using Newtonsoft.Json;
+
+@{
+    var serializedMessage = TempData["StatusMessage"] as string ?? string.Empty;
+    var statusMessage = JsonConvert.DeserializeObject<StatusMessage>(serializedMessage);
+}
+
+@if (statusMessage != null)
+{
+    var statusMessageClass = statusMessage.Type switch
+    {
+        MessageType.Success => "success",
+        MessageType.Warning => "warning",
+        MessageType.Error => "danger",
+        MessageType.Info => "info",
+        _ => "info" // Valeur par défaut
+    };
+
+    <div class="modal fade" id="statusMessageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="statusMessageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-@statusMessageClass text-white" style="padding: 10px 16px;">
+                    <h5 class="modal-title" id="statusMessageModalLabel">@statusMessage.MessageTitle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-@statusMessageClass alert-dismissible m-0" role="alert">
+                        @statusMessage.MessageContent
+                    </div>                    
+                </div>
+                <div class="modal-footer" style="padding: 6px 12px;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

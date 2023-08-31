@@ -1,0 +1,109 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "Liste des rôles";
+
+    int index = 0;
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+<div class="card shadow mt-4">
+    <div class="card-body">
+        <div class="col">
+            <a role="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-modal">
+                Nouveau
+            </a>
+        </div>
+        <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>Libellé</th>
+                    <th>Utilisateurs</th>
+                    <th>Habilitations</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td class="autofill">@(++index)</td>
+                        <td>@role.Id</td>
+                        <td>@role.Name</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td class="autofill">
+                            <a role="button" class="btn btn-info editBtn" data-bs-toggle="modal" data-bs-target="#edit-modal" data-roleid="@role.Id" data-rolename="@role.Name">Modifier</a>
+                            <a role="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#delete-modal" data-id="@role.Id">Supprimer</a>
+                            <a href="#" class="btn btn-success">Habilitations</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="create-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="staticBackdropLabel">Nouveau rôle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Create" method="post">
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <input class="form-control" name="roleName" required />
+                        <label class="required form-label">Libellé</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="staticBackdropLabel">Modifier un rôle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Edit" method="post">
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <input class="form-control" name="roleName" id="roleName" required />
+                        <label class="required form-label">Libellé</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="roleId" name="roleId" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-info">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(".editBtn").click(function () {
+            var roleId = $(this).data("roleid");
+            var roleName = $(this).data("rolename");
+
+            $("#edit-modal").find(".modal-footer #roleId").val(roleId);
+            $("#edit-modal").find(".modal-body #roleName").val(roleName);
+        });
+    </script>
+}

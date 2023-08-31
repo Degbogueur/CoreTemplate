@@ -1,0 +1,37 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/*ul.dropdown-menu {
+    padding: 0;
+}*/
+
+ul.dropdown-menu li > a {
+    padding: 6px 16px;
+    color: #000000;
+}
+
+td.autofill, th.autofill {
+    width: 1px;
+    white-space: nowrap;
+}
+
+.required:after {
+    content: " *";
+    color: red;
+}

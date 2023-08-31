@@ -1,0 +1,52 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{
+    ViewData["Title"] = "Liste des utilisateurs";
+
+    int index = 0;
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+<div class="card shadow mt-4">
+    <div class="card-body py-4">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom et prénoms</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Email</th>
+                    <th>Rôles</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td class="autofill">@(++index)</td>
+                        <td>@user.FullName</td>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@string.Join(", ", user.Roles.ToList())</td>
+                        <td class="autofill">
+                            <a href="#" class="btn btn-info">Modifier</a>
+                            <a role="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#delete-modal" data-id="@user.Id">Supprimer</a>
+                            <a asp-action="ManageRoles" asp-route-userId="@user.Id" class="btn btn-success">Rôles</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(".deleteBtn").click(function () {
+            var id = $(this).data("id");
+            $("#delete-modal").find(".modal-footer #id").val(id);
+        })
+    </script>
+}
