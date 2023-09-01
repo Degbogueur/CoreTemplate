@@ -2,5 +2,9 @@
 @using CoreTemplate.Models
 @using CoreTemplate.ViewModels
 @using Microsoft.AspNetCore.Identity
+@using CoreTemplate.Helpers.Constants
+@using Microsoft.AspNetCore.Authorization
 @using CoreTemplate.Models.Authentication
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@inject IAuthorizationService AuthorizationService;

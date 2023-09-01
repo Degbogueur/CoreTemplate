@@ -1,0 +1,55 @@
+﻿@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Modifier les infos utlisateurs";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+<div class="card shadow mt-4">
+    <form asp-action="Edit" method="post">
+        <div class="card-body">
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="FirstName" class="form-control" required />
+                        <label asp-for="FirstName" class="required form-label"></label>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="LastName" class="form-control" required />
+                        <label asp-for="LastName" class="required form-label"></label>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <input asp-for="UserName" class="form-control" required />
+                        <label asp-for="UserName" class="required form-label"></label>
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <input type="email" asp-for="Email" class="form-control" required />
+                        <label asp-for="Email" class="required form-label"></label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">
+                Valider
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @*@Html.Partial("_ValidationScriptsPartial");*@
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -3,5 +3,7 @@
     public class Enumerations
     {
         public enum Roles { SuperAdmin, Admin, BasicUser }
+
+        public enum Modules { Users, Roles }
     }
 }

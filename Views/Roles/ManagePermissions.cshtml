@@ -1,0 +1,83 @@
+﻿@model RolePermissionsViewModel
+
+@{
+    ViewData["Title"] = "Gestion des habilitations";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+<div class="card shadow mt-4">
+    <form asp-action="UpdatePermissions" method="post">
+        <div class="card-body">
+            <h4 class="mb-4">@Model.RoleName</h4>
+            <input type="hidden" asp-for="RoleId" />
+
+            <div class="accordion" id="permissionsAccordion">
+                @for (int i = 0; i < Model.PermissionsGroups.Count; i++)
+                {
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading-@Model.PermissionsGroups[i].GroupName">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@Model.PermissionsGroups[i].GroupName" aria-expanded="true" aria-controls="@Model.PermissionsGroups[i].GroupName">
+                                Module: @Model.PermissionsGroups[i].GroupName
+                            </button>
+                        </h2>
+                        <div id="@Model.PermissionsGroups[i].GroupName" class="accordion-collapse collapse" aria-labelledby="heading-@Model.PermissionsGroups[i].GroupName" data-bs-parent="#permissionsAccordion">
+                            <div class="accordion-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Permissions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int j = 0; j < Model.PermissionsGroups[i].Permissions.Count; j++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input asp-for="PermissionsGroups[i].Permissions[j].IsSelected" class="form-check-input" />
+                                                    <input type="hidden" asp-for="PermissionsGroups[i].Permissions[j].Value" />
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" asp-for="PermissionsGroups[i].Permissions[j].IsSelected">
+                                                        @Model.PermissionsGroups[i].Permissions[j].Value.Split(':')[1].Trim()
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @*<table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Modules</th>
+                        <th>Permissions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Claims.Count; i++)
+                    {
+                        <tr>
+                            <td><input asp-for="@Model.Claims[i].IsSelected" class="form-check-input" /></td>
+                            <td>
+                                <input type="hidden" asp-for="@Model.Claims[i].Value" />
+                                <label class="form-check-label" asp-for="@Model.Claims[i].IsSelected">@Model.Claims[i].Value.Split('.')[0].Trim()</label>
+                            </td>
+                            <td><label class="form-check-label" asp-for="@Model.Claims[i].IsSelected">@Model.Claims[i].Value.Split(':')[1].Trim()</label></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>*@
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </div>
+    </form>
+</div>

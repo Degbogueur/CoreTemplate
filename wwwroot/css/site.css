@@ -35,3 +35,7 @@ td.autofill, th.autofill {
     content: " *";
     color: red;
 }
+
+div.row .form-floating {
+    margin-bottom: 1rem;
+}

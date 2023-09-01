@@ -76,7 +76,11 @@ namespace CoreTemplate.Data.Seeds
         private static async Task SeedClaimsForSuperAdminUser(this RoleManager<IdentityRole> roleManager)
         {
             var saRole = await roleManager.FindByNameAsync(Roles.SuperAdmin.ToString());
-            await roleManager.AddPermissionClaims(saRole, "Products");
+
+            foreach (var module in Enum.GetValues(typeof(Modules)))
+            { 
+                await roleManager.AddPermissionClaims(saRole, module.ToString());
+            }
         }
 
         public static async Task AddPermissionClaims(this RoleManager<IdentityRole> roleManager, IdentityRole role, string module)

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreTemplate.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230830172031_Table AspNetUsers Column Photo Set Nullable")]
-    partial class TableAspNetUsersColumnPhotoSetNullable
+    [Migration("20230901110621_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
