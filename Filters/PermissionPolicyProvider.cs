@@ -19,7 +19,7 @@ namespace CoreTemplate.Filters
 
         public Task<AuthorizationPolicy?> GetFallbackPolicyAsync()
         {
-            return FallbackPolicyProvider.GetDefaultPolicyAsync();
+            return FallbackPolicyProvider.GetFallbackPolicyAsync();
         }
 
         public Task<AuthorizationPolicy?> GetPolicyAsync(string policyName)
