@@ -4,6 +4,6 @@
     {
         public enum Roles { SuperAdmin, Admin, BasicUser }
 
-        public enum Modules { Users, Roles }
+        public enum Modules { Settings, Users, Roles }
     }
 }

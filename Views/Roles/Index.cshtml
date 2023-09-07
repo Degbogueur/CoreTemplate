@@ -34,7 +34,7 @@
                         <td>@role.Id</td>
                         <td>@role.Name</td>
                         <td>@role.Users.Count</td>
-                        <td>@role.Claims.Count</td>
+                        <td>@role.Claims.Count / @ViewBag.AllClaims</td>
                         <td class="autofill">
                             <a role="button" class="btn btn-info editBtn" data-bs-toggle="modal" data-bs-target="#edit-modal" data-roleid="@role.Id" data-rolename="@role.Name">Modifier</a>
                             <a role="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#delete-modal" data-id="@role.Id">Supprimer</a>

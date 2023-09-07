@@ -26,6 +26,7 @@ namespace CoreTemplate.Controllers
                 });
             }
 
+            ViewBag.AllClaims = Permissions.GenerateAllPermissions().Count;
             return View(roles);
         }
 
